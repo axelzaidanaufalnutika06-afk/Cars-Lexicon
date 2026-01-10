@@ -14,8 +14,8 @@ if (!isset($_SESSION['username'])) {
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Car Lexicon</title>
-    <link rel="icon" href="logocars.png" />
+    <title>Car Lexicon | Admin</title>
+    <link rel="icon" href="img/iconweb.png" />
     <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
@@ -44,7 +44,6 @@ if (!isset($_SESSION['username'])) {
     </style>
 </head>
 <body>
-    <!-- nav begin -->
     <nav class="navbar navbar-expand-sm bg-body-tertiary sticky-top bg-secondary-subtle">
     <div class="container">
         <a class="navbar-brand" target="_blank" href=".">Car Lexicon</a>
@@ -66,7 +65,13 @@ if (!isset($_SESSION['username'])) {
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="admin.php?page=article">Article</a>
-            </li> 
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="admin.php?page=gallery">Gallery</a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" href="admin.php?page=user">User</a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-danger fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <?= $_SESSION['username']?>
@@ -79,46 +84,41 @@ if (!isset($_SESSION['username'])) {
         </div>
     </div>
     </nav>
-    <!-- nav end -->
-    <!-- content begin -->
-<section id="content" class="p-5">
-    <div class="container">
-        <?php
-        if(isset($_GET['page'])){
-        ?>
-            <h4 class="lead display-6 pb-2 border-bottom border-danger-subtle"><?= ucfirst($_GET['page'])?></h4>
+    <section id="content" class="p-5">
+        <div class="container">
             <?php
-            include($_GET['page'].".php");
-        }else{
-        ?>
-            <h4 class="lead display-6 pb-2 border-bottom border-danger-subtle">Dashboard</h4>
-            <?php
-            include("dashboard.php");
-        }
-        ?>
-    </div>
-</section>
-<!-- content end -->
-    <!-- footer begin -->
+            if(isset($_GET['page'])){
+                $page = $_GET['page'];
+            ?>
+                <h4 class="lead display-6 pb-2 border-bottom border-danger-subtle"><?= ucfirst($page)?></h4>
+                <?php
+                // Mengecek apakah file ada sebelum di-include untuk mencegah error
+                if (file_exists($page . ".php")) {
+                    include($page . ".php");
+                } else {
+                    echo "<div class='alert alert-danger'>Halaman tidak ditemukan!</div>";
+                }
+            } else {
+            ?>
+                <h4 class="lead display-6 pb-2 border-bottom border-danger-subtle">Dashboard</h4>
+                <?php
+                include("dashboard.php");
+            }
+            ?>
+        </div>
+    </section>
     <footer class="text-center p-5 bg-secondary-subtle">
-    <div>
-        <a href="https://www.instagram.com/udinusofficial"
-        ><i class="bi bi-instagram h2 p-2 text-dark"></i
-        ></a>
-        <a href="https://twitter.com/udinusofficial"
-        ><i class="bi bi-twitter h2 p-2 text-dark"></i
-        ></a>
-        <a href="https://wa.me/+62812685577"
-        ><i class="bi bi-whatsapp h2 p-2 text-dark"></i
-        ></a>
-    </div>
-    <div>Axel Zaidan' &copy; 2025</div>
+        <div>
+            <a href="https://www.instagram.com/udinusofficial"><i class="bi bi-instagram h2 p-2 text-dark"></i></a>
+            <a href="https://twitter.com/udinusofficial"><i class="bi bi-twitter h2 p-2 text-dark"></i></a>
+            <a href="https://wa.me/+62812685577"><i class="bi bi-whatsapp h2 p-2 text-dark"></i></a>
+        </div>
+        <div>Axel Zaidan &copy; 2025</div>
     </footer>
-    <!-- footer end -->
     <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"
     ></script>
 </body>
-</html> 
+</html>

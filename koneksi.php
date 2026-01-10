@@ -1,10 +1,10 @@
 <?php
 date_default_timezone_set('Asia/Jakarta');
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "web_car_lexicon"; //nama database
+$servername = "sql305.infinityfree.com";
+$username = "if0_40846311";
+$password = "1bWI0nyejeM";
+$db = "if0_40846311_carlexicon"; //nama database
 
 //create connection
 $conn = new mysqli($servername,$username,$password,$db);

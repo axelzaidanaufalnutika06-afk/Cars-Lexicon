@@ -7,7 +7,7 @@ include "koneksi.php";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Car Lexicon</title>
-    <link rel="icon" href="logocars.png">
+    <link rel="icon" type="image/png" href="img/iconweb.png?v=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <style>
@@ -116,39 +116,43 @@ include "koneksi.php";
 <!-- article end -->
 
     <!-- gallery begin -->
-    <section id="gallery" class="text-center p-5 bg-secondary-subtle">
-        <div class="container">
-            <h1 class="fw-bold display-4 pb-3">gallery</h1>
-            <div id="carouselExample" class="carousel slide">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="img/huracansakura.jpg" class="d-block w-100" alt="Huracan Sakura">
+<section id="gallery" class="text-center p-5 bg-secondary-subtle">
+    <div class="container">
+        <h1 class="fw-bold display-4 pb-3">Gallery</h1>
+
+        <?php
+        $sql = "SELECT * FROM gallery ORDER BY tanggal DESC";
+        $hasil = $conn->query($sql);
+
+        $active = true;
+        ?>
+
+        <div id="carouselGallery" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+
+                <?php while ($row = $hasil->fetch_assoc()) { ?>
+                    <div class="carousel-item <?= $active ? 'active' : '' ?>">
+                        <img src="img/<?= $row['gambar'] ?>" 
+                             class="d-block w-100"
+                             alt="gallery">
                     </div>
-                    <div class="carousel-item">
-                        <img src="img/blue huracan.jpg" class="d-block w-100" alt="Blue Huracan">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/black huracan.jpg" class="d-block w-100" alt="Black Huracan">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/black huracan.jpg" class="d-block w-100" alt="Black Huracan">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/huracansakura.jpg" class="d-block w-100" alt="Huracan Sakura">
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                <?php 
+                    $active = false;
+                } ?>
+
             </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselGallery" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselGallery" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
         </div>
-    </section>
-    <!-- gallery end -->
+    </div>
+</section>
+<!-- gallery end -->
 
     <!-- schedule begin -->
     <section id="schedule" class="text-center p-5">
